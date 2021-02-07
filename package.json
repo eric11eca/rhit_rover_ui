@@ -1,0 +1,26 @@
+{
+  "name": "roverui",
+  "version": "1.0.0",
+  "description": "User Dashboard for RHIT Rover",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "serve": "nodemon index.js"
+  },
+  "keywords": [
+    "JS",
+    "UI",
+    "rover",
+    "dashboard"
+  ],
+  "author": "Eric Chen, Kelley",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^11.2.3",
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "roslib": "^1.1.0",
+    "xterm": "^4.9.0"
+  }
+}
