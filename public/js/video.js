@@ -12,10 +12,7 @@ $("#video_contain").on("mouseover mouseout", function (e) {
   }
 });
 
-$("#play").on("click", toggle);
-video.addEventListener("click", () => {
-  toggle();
-});
+
 
 function toggle() {
   if (video.paused) {

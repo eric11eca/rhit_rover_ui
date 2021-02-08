@@ -6,10 +6,6 @@ var ros = new ROSLIB.Ros({
 });
 
 ros.on('connection', function() {
-    document.getElementById("video_wrapper").innerHTML = '<img id="usb_cam">'
-    document.getElementById("video_wrapper").style.marginTop = 0;
-    document.getElementById("video_wrapper").style.marginLeft = 0;
-
     first_close = true;
 });
 
@@ -19,9 +15,6 @@ ros.on('error', function(error) {
 
 ros.on('close', function() {
     console.log('Connection to websocket server closed.');
-    document.getElementById("video_wrapper").innerHTML = '<h1>WELCOME BACK CHRIS</h1>'
-    document.getElementById("video_wrapper").style.marginTop = "25%";
-    document.getElementById("video_wrapper").style.marginLeft = "25%";
     if (first_close) {
         first_close = false;
     }
@@ -40,11 +33,54 @@ var camera_info_topic = new ROSLIB.Topic({
     messageType: 'sensor_msgs/CompressedImage'
 });
 
-camera_info_topic.subscribe(function(message) {
-    console.log("got image frame")
-    document.getElementById('usb_cam').src = "data:image/jpg;base64," + message.data;
-    //camera_info_topic.unsubscribe();
+var joy_info_topic = new ROSLIB.Topic({
+    ros: ros, name: '/joyRight',
+    messageType: 'std_msgs/String'
 });
+
+
+let streaming = false;
+
+$("#cameraviz").on("mouseover mouseout", function (e){
+  if (e.type === "mouseout") {
+    $("#camera_play").css("display", "none");
+  } else {
+    $("#camera_play").css("display", "block");
+  }
+});
+
+$("#play").on("click", function(e) {
+  if (streaming == false) {
+    streaming = true;
+    document.getElementById("video_wrapper").innerHTML = '<img id="usb_cam">';
+    document.getElementById("video_wrapper").style.marginTop = 0;
+    document.getElementById("video_wrapper").style.marginLeft = 0;
+
+    camera_info_topic.subscribe(function(message) {
+      document.getElementById('usb_cam').src = "data:image/jpg;base64," + message.data;
+    });
+  } else if (streaming == true) {
+    streaming = false;
+    camera_info_topic.unsubscribe();
+    document.getElementById("video_wrapper").innerHTML = '<h1>WELCOME BACK CHRIS</h1>'
+    document.getElementById("video_wrapper").style.marginTop = "25%";
+    document.getElementById("video_wrapper").style.marginLeft = "25%";
+  }
+});
+
+
+//setInterval(insertRandomDatapoints, updateInterval);
+
+function insertRandomDatapoints() {
+    joy_info_topic.subscribe(function(message) {
+        let tmpData = {
+            one: parseFloat(message.data)
+        };
+        chart2.series.addData(tmpData);
+        chart2.render();
+    });
+}
+
 
 // var gps_topic = new ROSLIB.Topic({
 //     ros: ros, name: '/usb_cam/image_raw/compressed',
