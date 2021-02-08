@@ -50,36 +50,31 @@ $("#cameraviz").on("mouseover mouseout", function (e){
 });
 
 $("#play").on("click", function(e) {
-  if (streaming == false) {
-    streaming = true;
-    document.getElementById("video_wrapper").innerHTML = '<img id="usb_cam">';
-    document.getElementById("video_wrapper").style.marginTop = 0;
-    document.getElementById("video_wrapper").style.marginLeft = 0;
+    let video = document.getElementById("video_wrapper");
+    if (streaming == false) {
+        streaming = true;
+        var node = document.createElement("H6");
+        node.setAttribute("id", "st");
+        //node.innerHTML = "=> Start Streaming Front Camera";
+        document.getElementById("status").appendChild(node);
+        for(var i = 0 ; i < 10; i++){
+            document.getElementById("st").appendChild()
+        }
+        video.innerHTML = '<img id="usb_cam">';
+        video.style.marginTop = 0;
+        video.style.marginLeft = 0;
 
-    camera_info_topic.subscribe(function(message) {
-      document.getElementById('usb_cam').src = "data:image/jpg;base64," + message.data;
-    });
-  } else if (streaming == true) {
-    streaming = false;
-    camera_info_topic.unsubscribe();
-    document.getElementById("video_wrapper").innerHTML = '<h1>WELCOME BACK CHRIS</h1>'
-    document.getElementById("video_wrapper").style.marginTop = "25%";
-    document.getElementById("video_wrapper").style.marginLeft = "25%";
-  }
+        camera_info_topic.subscribe(function(message) {
+        document.getElementById('usb_cam').src = "data:image/jpg;base64," + message.data;
+        });
+    } else if (streaming == true) {
+        streaming = false;
+        camera_info_topic.unsubscribe();
+        video.innerHTML = '<h1>WELCOME BACK CHRIS</h1>';
+        video.style.marginTop = "25%";
+        video.style.marginLeft = "25%";
+    }
 });
-
-
-//setInterval(insertRandomDatapoints, updateInterval);
-
-function insertRandomDatapoints() {
-    joy_info_topic.subscribe(function(message) {
-        let tmpData = {
-            one: parseFloat(message.data)
-        };
-        chart2.series.addData(tmpData);
-        chart2.render();
-    });
-}
 
 
 // var gps_topic = new ROSLIB.Topic({

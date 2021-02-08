@@ -108,7 +108,9 @@ body {
   margin-bottom: 90px;
 }
 
-
+#status {
+  color:white;
+}
 
 
 /* Battery Status Display */

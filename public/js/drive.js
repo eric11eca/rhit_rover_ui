@@ -46,7 +46,7 @@ var chart2 = new Rickshaw.Graph({
     height: "120",
     renderer: "line",
     min: "0",
-    max: "1",
+    max: "100",
     series: new Rickshaw.Series.FixedDuration([{
         name: 'one',
         color: '#fff'
@@ -67,6 +67,22 @@ var y_axis = new Rickshaw.Graph.Axis.Y({
     element: document.getElementById('y_axis'),
 });
 
+const si = require('systeminformation');
+
+//setInterval(insertRandomDatapoints, updateInterval);
+
+async function insertRandomDatapoints() {
+  let tmpData = {
+      one: 0
+  };
+  
+  si.networkInterfaces().then(data => {
+    tmpData.one = data[0].speed/10;
+  });
+
+  await chart2.series.addData(tmpData);
+  await chart2.render();
+}
 
 // const term = new Terminal();
 
