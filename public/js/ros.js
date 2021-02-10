@@ -37,6 +37,10 @@ window.setInterval(function(){
 }, 1000);
 
 
+ros.getNodes(function(nodes) {
+    console.log(nodes);
+});
+
 var camera_info_topic = new ROSLIB.Topic({
     ros: ros, name: '/usb_cam/image_raw/compressed',
     messageType: 'sensor_msgs/CompressedImage'
@@ -46,6 +50,8 @@ var joy_info_topic = new ROSLIB.Topic({
     ros: ros, name: '/driveCommands',
     messageType: 'std_msgs/Float32MultiArray'
 });
+
+
 
 function log_status(messgae, div_id) {
     var node = document.createElement("H6");

@@ -28,7 +28,7 @@ setInterval(function() {
   line3.append(new Date().getTime(), battery_size/100);
   document.getElementById("battery_percent").innerText = battery_size + '%';
   time_count += 1;
-  if (time_count % 10 == 0) battery_size -= 1;
+  if (time_count % 7 == 0) battery_size -= 3;
   if (battery_size == 0) battery_size = 100;
 }, 1000);
 

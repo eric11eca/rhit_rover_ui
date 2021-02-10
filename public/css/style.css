@@ -16,8 +16,15 @@
   to { width: 100% }
 }
 
+
 button:hover {
   border: none;
+  outline: none
+}
+
+button:focus {
+  border: none;
+  outline: none;
 }
 
 :root {
@@ -25,12 +32,16 @@ button:hover {
   --color_r: 170;
   --color_g: 207;
   --color_b: 209;
+
+  --black: #000000;
+  --light-black:#05080d;
+  --grey: #262828;
 }
 
 body {
   font-family: main_font;
-  background: linear-gradient(90deg, #191919 1.85vh, transparent 1%) center,
-    linear-gradient(#191919 1.85vh, transparent 1%) center, #272928;
+  background: linear-gradient(90deg, var(--light-black) 1.85vh, transparent 1%) center,
+    linear-gradient(var(--light-black) 1.85vh, transparent 1%) center, var(--grey);
   background-size: 2.04vh 2.04vh;
   overflow-x: hidden;
   overflow-y: auto;
@@ -38,8 +49,8 @@ body {
 }
 
 #header {
-  background: #333;
-  border-bottom: 0.18vh solid rgb(223, 221, 221);
+  background: var(--light-black);
+  border-bottom: 0.18vh solid var(--grey);
   border-radius: 0;
   color: #fff;
 }
@@ -52,8 +63,7 @@ body {
     CONTENT STYLE
 ----------------------------------------------------- */
 .card {
-  background: linear-gradient(90deg, #191919 1.85vh, transparent 1%) center,
-    linear-gradient(#191919 1.85vh, transparent 1%) center, #272928;
+  background: inherit;
   background-size: 2.04vh 2.04vh;
   border: 0.18vh solid var(--edx_white);
   border-top-left-radius: 0.278vh;
@@ -70,6 +80,12 @@ body {
   justify-self: center;
 }
 
+.video_card {
+  color: #fff;
+  min-height: 560px;
+  text-align: center;
+}
+
 #visual {
   margin-top: 20px;
   margin-bottom: 30px;
@@ -78,8 +94,8 @@ body {
 .videoWrapper {
   display: block;
   min-width: 640px;
-  min-height: 300px;
-  margin-top: 20%;
+  min-height: 450px;
+  margin-top: auto;
 	margin-left: auto;
   text-align: center;
 }
@@ -100,11 +116,25 @@ body {
 
 .controls {
   position: absolute;
-  background: inherit;
-  width: 50%;
+  background: transparent;
+  width: 10%;
   padding: 5px;
   box-sizing: content-box;
   bottom: 0;
+}
+
+.play {
+  outline: none;
+  border: none;
+  color: var(--edx_white);
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.play:hover, .play:focus {
+  outline: none;
+  border: none;
+  background-color: transparent;
 }
 
 #data_card1, #data_card2, #data_card3 {

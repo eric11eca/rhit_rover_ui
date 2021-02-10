@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/roboto.css">
   <link rel="stylesheet" href="css/clock.css">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/arm_style.css">
+  <link rel="stylesheet" href="css/node_list.css">
 
 	<!-- FontAwesome JS -->
 	<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"></script>
@@ -61,13 +61,13 @@
 	<div id="content", class="container-fluid">
     <div id="visual" class="row">
       <div class="col">
-        <div id="gripviz" class="card">
+        <div id="gripviz" class="card video_card">
           <div class="card-body">
             <div id="grip_video_wrapper" class="videoWrapper">
               <h1 id= "video_brand">WELCOME BACK CHRIS</h1>
             </div>
             <div id = "grip_camera_control" class="controls" style="display: none">
-                <button id="grip_camera_play" class="btn btn-dark">
+                <button id="grip_camera_play" class="play btn btn-dark">
                   <i class="far fa-play-circle fa-3x"></i>
                 </button>
             </div>
@@ -76,13 +76,13 @@
       </div>
 
       <div class="col">
-        <div id="baseviz" class="card">
+        <div id="baseviz" class="card video_card">
           <div class="card-body">
             <div id="base_video_wrapper" class="videoWrapper">
               <h1 id= "rviz_brand">RHIT ROVER TEAM</h1>
             </div>
             <div id="base_camera_control" class="controls" style="display: none">
-              <button id="base_camera_play" class="btn btn-dark">
+              <button id="base_camera_play" class="play btn btn-dark">
                 <i class="far fa-play-circle fa-3x"></i>
               </button>
             </div>
@@ -143,8 +143,19 @@
       
       <div class="col-xl-4 col-lg-12">
         <div id="data_card1" class="card h-100 card-chart">
-          <h5 class="card-header">Joystick Speed</h5>
+          <h5 class="card-header">Arm Status</h5>
           <div id="joyspeed" class="card-body">
+            <table id="processContainer">
+              <thead>
+                  <tr>
+                    <td class="pid header">Joint</td>
+                    <td class="state header">Angel</td>
+                    <td class="state header">Range</td>
+                  </tr>
+              </thead>
+              <tbody id="processList">
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

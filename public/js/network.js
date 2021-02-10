@@ -30,7 +30,7 @@ let charts = [new SmoothieChart(chartOptions[0]), new SmoothieChart(chartOptions
 
 charts[0].addTimeSeries(series[0], {
   strokeStyle:'rgb(255, 0, 255)', 
-  fillStyle:'rgba(255, 0, 255, 0.3)',
+  //fillStyle:'rgba(255, 0, 255, 0.3)',
   lineWidth:3
 });
 
@@ -38,7 +38,7 @@ charts[0].addTimeSeries(series[0], {
 
 charts[1].addTimeSeries(series[1], {
   strokeStyle:'rgb(255, 0, 255)', 
-  fillStyle:'rgba(255, 0, 255, 0.3)',
+  //fillStyle:'rgba(255, 0, 255, 0.3)',
   lineWidth:3
 });
 
