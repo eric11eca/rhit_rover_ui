@@ -61,7 +61,7 @@ class AudioManager {
               } else {
                   return {
                       play: () => {return true;}
-                  }
+                  };
               }
           }
       });

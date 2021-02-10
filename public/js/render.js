@@ -40,7 +40,6 @@ function updateScroll(div_id){
   element.scrollTop = element.scrollHeight;
 }
 
-
 function videoPlayButtonControl(control_id, e) {
   if (e.type === "mouseout") {
     $(control_id).css("display", "none");
@@ -77,3 +76,29 @@ function subscribeCameraTopic(camera_id, camera_name, brand) {
       create_globe('#' + camera_id);
   }
 }
+
+window.audioManager = new AudioManager();
+window.audioManager.stdout.play();
+window.audioManager.theme.play();
+
+document.querySelectorAll(".mod_column").forEach(e => {
+  e.setAttribute("class", "mod_column activated");
+});
+
+let i = 0;
+let left = document.querySelectorAll("#mod_column_left > div");
+let right = document.querySelectorAll("#mod_column_right > div");
+let x = setInterval(() => {
+    if (!left[i] && !right[i]) {
+        clearInterval(x);
+    } else {
+        window.audioManager.panels.play();
+        if (left[i]) {
+            left[i].setAttribute("style", "animation-play-state: running;");
+        }
+        if (right[i]) {
+            right[i].setAttribute("style", "animation-play-state: running;");
+        }
+        i++;
+    }
+}, 500);

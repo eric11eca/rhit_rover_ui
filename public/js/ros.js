@@ -58,6 +58,7 @@ function log_status(messgae, div_id) {
     node.innerHTML = messgae;
     document.getElementById(div_id).appendChild(node);
     updateScroll(div_id);
+    window.audioManager.folder.play();
 }
 
 
