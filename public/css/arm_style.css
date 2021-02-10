@@ -75,8 +75,8 @@ body {
   margin-bottom: 30px;
 }
 
-#cameraviz,
-#mapviz {
+#gripviz,
+#baseviz {
   color: #fff;
   min-height: 560px;
   justify-content: center;
@@ -99,6 +99,7 @@ body {
     typing 3.5s steps(40, end);
 }
 
+
 #usb_cam {
   height: 500px;
   width: 100%;
@@ -114,7 +115,7 @@ body {
   bottom: 0;
 }
 
-#play {
+#grip_camera_play {
   outline: none;
   border: none;
   color: var(--edx_white);

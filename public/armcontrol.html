@@ -13,7 +13,7 @@
   <!-- Main Module Style Sheet -->
   <link rel="stylesheet" href="css/roboto.css">
   <link rel="stylesheet" href="css/clock.css">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/arm_style.css">
 
 	<!-- FontAwesome JS -->
 	<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"></script>
@@ -46,7 +46,7 @@
             <a class="nav-link" href="#">Autonomous<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a id = "arm_nav" class="nav-link" href="javascript:loadNewWindow()">Arm Control</a>
+            <a id = "arm_nav" class="nav-link" href="#">Arm Control</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Science</a>
@@ -60,13 +60,13 @@
 	<div id="content", class="container-fluid">
     <div id="visual" class="row">
       <div class="col">
-        <div id="cameraviz" class="card">
+        <div id="gripviz" class="card">
           <div class="card-body">
-            <div id="video_wrapper1" class="videoWrapper">
+            <div id="grip_video_wrapper" class="videoWrapper">
               <h1 id= "video_brand">WELCOME BACK CHRIS</h1>
             </div>
-            <div id="camera_play" class="controls" style="display: none">
-                <button id="play" class="btn btn-dark">
+            <div id = "grip_camera_control" class="controls" style="display: none">
+                <button id="grip_camera_play" class="btn btn-dark">
                   <i class="far fa-play-circle fa-3x"></i>
                 </button>
             </div>
@@ -75,12 +75,12 @@
       </div>
 
       <div class="col">
-        <div id="mapviz" class="card">
+        <div id="baseviz" class="card">
           <div class="card-body">
-            <div id="video_wrapper2" class="videoWrapper">
+            <div id="base_video_wrapper" class="videoWrapper">
               <h1 id= "rviz_brand">RHIT ROVER TEAM</h1>
-              <div id="rviz_play" class="controls" style="display: none">
-                <button id="play" class="btn btn-dark">
+              <div id="base_camera_control" class="controls" style="display: none">
+                <button id="base_camera_play" class="btn btn-dark">
                   <i class="far fa-play-circle fa-3x"></i>
                 </button>
               </div>
@@ -184,10 +184,11 @@
   <!-- Main module JS -->
   <script src="js/render.js" type="text/javascript"></script>
   <script src="js/ros.js" type="text/javascript"></script>
-  <script src="js/render_drive.js" type="text/javascript"></script>
+  <script src="js/render_arm.js" type="text/javascript"></script>
   <script src="js/battery.js" type="text/javascript"></script>
   <script src="js/clock.js" type="text/javascript"></script>
   <script src="js/network.js" type="text/javascript"></script>
+ 
 
 </body>
 
