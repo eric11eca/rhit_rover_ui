@@ -92,7 +92,7 @@ body {
     typing 3.5s steps(40, end);
 }
 
-#usb_cam {
+.usb_cam {
   height: 500px;
   width: 100%;
   object-fit: contain;

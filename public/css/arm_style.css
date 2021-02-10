@@ -6,7 +6,8 @@
 }
 
 
-#grip_camera_play {
+#grip_camera_play, 
+#base_camera_play {
   outline: none;
   border: none;
   color: var(--edx_white);
