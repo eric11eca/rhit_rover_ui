@@ -28,20 +28,18 @@ button:focus {
 }
 
 :root {
-  --edx_white: rgba(170, 207, 209, 0.5);
   --color_r: 170;
   --color_g: 207;
   --color_b: 209;
-
-  --black: #000000;
-  --light-black:#05080d;
-  --grey: #262828;
+  --color_black: #000000;
+  --color_light_black: #05080d;
+  --color_grey: #262828;
 }
 
 body {
   font-family: main_font;
-  background: linear-gradient(90deg, var(--light-black) 1.85vh, transparent 1%) center,
-    linear-gradient(var(--light-black) 1.85vh, transparent 1%) center, var(--grey);
+  background: linear-gradient(90deg, var(--color_light_black) 1.85vh, transparent 1%) center,
+    linear-gradient(var(--color_light_black) 1.85vh, transparent 1%) center, var(--color_grey);
   background-size: 2.04vh 2.04vh;
   overflow-x: hidden;
   overflow-y: auto;
@@ -49,7 +47,7 @@ body {
 }
 
 #header {
-  background: var(--light-black);
+  background: var(--color_light_black);
   border-bottom: 0.18vh solid var(--grey);
   border-radius: 0;
   color: #fff;
@@ -65,14 +63,14 @@ body {
 .card {
   background: inherit;
   background-size: 2.04vh 2.04vh;
-  border: 0.18vh solid var(--edx_white);
+  border: 0.18vh solid rgba(var(--color_r), var(--color_g), var(--color_b), 0.5);
   border-top-left-radius: 0.278vh;
   border-top-right-radius: 0.278vh;
 }
 
 .card-header {
   color: white;
-  border-bottom: 0.18vh solid var(--edx_white);
+  border-bottom: 0.18vh solid rgba(var(--color_r), var(--color_g), var(--color_b), 0.5);
 }
 
 .card-body {
@@ -126,7 +124,7 @@ body {
 .play {
   outline: none;
   border: none;
-  color: var(--edx_white);
+  color: rgba(var(--color_r), var(--color_g), var(--color_b), 0.5);
   background-color: transparent;
   box-shadow: none;
 }
@@ -159,8 +157,8 @@ body {
 }
 
 #network_in_status, #network_out_status, #battery {
-  border-top: 0.18vh dotted var(--edx_white);
-  border-bottom: 0.18vh dotted var(--edx_white);
+  border-top: 0.18vh dotted rgba(var(--color_r), var(--color_g), var(--color_b), 0.5);
+  border-bottom: 0.18vh dotted rgba(var(--color_r), var(--color_g), var(--color_b), 0.5);
   height: 100px;
 }
 
@@ -189,7 +187,7 @@ body {
 }
 
 .status_detail h6 {
-  color: var(--edx_white);
+  color: rgba(var(--color_r), var(--color_g), var(--color_b), 0.5);
 }
 
 

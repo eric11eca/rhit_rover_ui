@@ -1,23 +1,7 @@
 const { webFrame } = require('electron');
-const { watchFile } = require('fs');
-const { waitForDebugger } = require('inspector');
-
 const fs = require('fs');
 
-let tronFile = fs.readFileSync(`${__dirname}/themes/tron.json`);
-let tron = JSON.parse(tronFile);
-
-let color_r = tron.colors.r;
-let color_g = tron.colors.g;
-let color_b = tron.colors.b;
-let black = tron.colors.black;
-let light_black = tron.colors.light_black;
-let grey = tron.colors.grey;
-
-webFrame.setZoomFactor(tron.window.zoom_factor);
-
 function loadNewWindow() {
-  console.log("open new window");
   const { BrowserWindow } = require('electron').remote;
   const remote_window = new BrowserWindow({
     height: 600,
@@ -27,11 +11,46 @@ function loadNewWindow() {
       enableRemoteModule: true,
     }
   });
-
   remote_window.loadURL(`file://${__dirname}/armcontrol.html`);
 }
 
-function create_globe(div_id) {
+window._purifyCSS = str => {
+  if (typeof str === "undefined") return "";
+  if (typeof str !== "string") {
+      str = str.toString();
+  }
+  return str.replace(/[<]/g, "");
+};
+
+let themeFile = fs.readFileSync(`${__dirname}/themes/tron.json`);
+let theme = JSON.parse(themeFile);
+
+
+window.ros_url = theme.ros.ip;
+window.color_r = theme.colors.r;
+window.color_g = theme.colors.g;
+window.color_b = theme.colors.b;
+window.black = theme.colors.black;
+window.light_black = theme.colors.light_black;
+window.grey = theme.colors.grey;
+
+if (document.querySelector("style.theming")) {
+  document.querySelector("style.theming").remove();
+}
+
+webFrame.setZoomFactor(theme.window.zoom_factor);
+document.getElementById("battery").style.width = theme.window.battery_plot_width;
+document.getElementById("network_in_status").style.width = theme.window.network_in_width;
+document.getElementById("network_out_status").style.width = theme.window.network_out_width;
+
+document.documentElement.style.setProperty('--color_r', theme.colors.r);
+document.documentElement.style.setProperty('--color_g', theme.colors.g);
+document.documentElement.style.setProperty('--color_r', theme.colors.b);
+document.documentElement.style.setProperty('--color_black', theme.colors.black);
+document.documentElement.style.setProperty('--color_light_black', theme.colors.light_black);
+document.documentElement.style.setProperty('--color_grey', theme.colors.grey);
+
+window.create_globe = function(div_id) {
   VANTA.GLOBE({
     el: div_id,
     mouseControls: false,
@@ -40,77 +59,59 @@ function create_globe(div_id) {
     minWidth: 200.00,
     scale: 0.70,
     scaleMobile: 1.00,
-    backgroundColor: light_black,
+    backgroundColor: window.light_black,
   });
-}
+};
 
-function updateScroll(div_id) {
+window.updateScroll = function (div_id) {
   var element = document.getElementById(div_id);
   element.scrollTop = element.scrollHeight;
-}
+};
 
-function videoPlayButtonControl(control_id, e) {
+window.videoPlayButtonControl = function(control_id, e) {
   if (e.type === "mouseout") {
     $(control_id).css("display", "none");
   } else {
     $(control_id).css("display", "block");
   }
-}
+};
 
-let streaming = {
+window.streaming = {
   "drive_video_wrapper": false,
   "arm_video_wrapper": false,
   "base_video_wrapper": false,
   "grip_video_wrapper": false,
 };
 
-function subscribeCameraTopic(camera_id, camera_name, brand) {
+window.subscribeCameraTopic = function(camera_id, camera_name, brand) {
   let video = document.getElementById(camera_id);
-  console.log(camera_name, streaming[camera_id]);
-  if (streaming[camera_id] == false) {
-    streaming[camera_id] = true;
-    video.innerHTML = `<img id="${camera_name}" class="usb_cam">`;
-    video.style.marginTop = 0;
-    video.style.marginLeft = 0;
-    console.log(document.getElementById(camera_name));
-    camera_info_topic.subscribe(function (message) {
-      document.getElementById(camera_name).src = "data:image/jpg;base64," + message.data;
-    });
-    log_status(CAMERA_SUB_ON, "status");
-  } else if (streaming[camera_id] == true) {
-    streaming[camera_id] = false;
-    camera_info_topic.unsubscribe();
-    log_status(CAMERA_SUB_OFF, "status");
-    video.innerHTML = `<h1>${brand}</h1>`;
-    video.style.marginTop = "auto";
-    video.style.marginLeft = "auto";
-    create_globe('#' + camera_id);
-  }
-}
 
-function subscribeCameraTopicArm(camera_id, camera_name, brand) {
-  let video = document.getElementById(camera_id);
-  console.log(camera_name, streaming[camera_id]);
-  if (streaming[camera_id] == false) {
-    streaming[camera_id] = true;
+  let camera_topic = window.ros_topics[camera_name];
+  console.log(camera_name);
+
+  if (window.streaming[camera_id] == false) {
+    window.streaming[camera_id] = true;
     video.innerHTML = `<img id="${camera_name}" class="usb_cam">`;
     video.style.marginTop = 0;
     video.style.marginLeft = 0;
-    console.log(document.getElementById(camera_name));
-    arm_camera_info_topic.subscribe(function (message) {
+    
+    camera_topic.subscribe(function (message) {
       document.getElementById(camera_name).src = "data:image/jpg;base64," + message.data;
     });
-    log_status(CAMERA_SUB_ON, "status");
+    
+    window.log_status(CAMERA_SUB_ON, "status");
   } else if (streaming[camera_id] == true) {
-    streaming[camera_id] = false;
-    arm_camera_info_topic.unsubscribe();
-    log_status(CAMERA_SUB_OFF, "status");
+    window.streaming[camera_id] = false;
+    window.log_status(CAMERA_SUB_OFF, "status");
+    camera_topic.unsubscribe();
+
     video.innerHTML = `<h1>${brand}</h1>`;
     video.style.marginTop = "auto";
     video.style.marginLeft = "auto";
-    create_globe('#' + camera_id);
+    
+    window.create_globe('#' + camera_id);
   }
-}
+};
 
 //window.audioManager = new AudioManager();
 //window.audioManager.stdout.play();

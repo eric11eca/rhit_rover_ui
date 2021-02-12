@@ -7,7 +7,7 @@ const JOY_SUB_ON = "=> Subscribed to joy_speed topic";
 const JOY_SUB_OFF = "=> Unsubscribed joy_speed topic";
 
 
-const rosbridge_url = `ws://${tron.ros.ip}:9090`;
+const rosbridge_url = `ws://${window.ros_url}:9090`;
 var first_close = true;
 
 var ros = new ROSLIB.Ros({
@@ -32,7 +32,6 @@ ros.on('close', function() {
 
 window.setInterval(function(){
     if (ros.isConnected) return;
-    console.log(ros.isConnected);
     ros.connect(rosbridge_url);
 }, 1000);
 
@@ -41,15 +40,29 @@ ros.getNodes(function(nodes) {
     console.log(nodes);
 });
 
-var camera_info_topic = new ROSLIB.Topic({
-    ros: ros, name: '/usb_cam/image_raw/compressed',
-    messageType: 'sensor_msgs/CompressedImage'
-});
+window.ros_topics = {
+    "drive_cam": new ROSLIB.Topic({
+        ros: ros, name: '/usb_cam/image_raw/compressed',
+        messageType: 'sensor_msgs/CompressedImage'
+    }),
+    
+    "grip_cam": new ROSLIB.Topic({
+        ros: ros, name: '/grip_cam/image_raw/compressed',
+        messageType: 'sensor_msgs/CompressedImage'
+    }),
+    
+    "base_cam": new ROSLIB.Topic({
+        ros: ros, name: '/base_cam/image_raw/compressed',
+        messageType: 'sensor_msgs/CompressedImage'
+    }),
+    
+    "microscope_cam": new ROSLIB.Topic({
+        ros: ros, name: '/microscope_cam/image_raw/compressed',
+        messageType: 'sensor_msgs/CompressedImage'
+    })
+};
 
-var arm_camera_info_topic = new ROSLIB.Topic({
-    ros: ros, name: '/usb_cam/image_raw/compressed',
-    messageType: 'sensor_msgs/CompressedImage'
-});
+
 
 var joy_info_topic = new ROSLIB.Topic({
     ros: ros, name: '/driveCommands',
@@ -62,7 +75,7 @@ function log_status(messgae, div_id) {
     var node = document.createElement("H6");
     node.innerHTML = messgae;
     document.getElementById(div_id).appendChild(node);
-    updateScroll(div_id);
+    window.updateScroll(div_id);
     //window.audioManager.folder.play();
 }
 

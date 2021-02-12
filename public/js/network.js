@@ -10,13 +10,13 @@ let chartOptions = [{
   grid:{
       millisPerLine: 5000,
       fillStyle:'transparent',
-      strokeStyle:`rgba(${color_r},${color_g},${color_b},0.4)`,
+      strokeStyle:`rgba(${window.color_r},${window.color_g},${window.color_b},0.4)`,
       verticalSections:3,
       borderVisible:false
   },
   labels:{
       fontSize: 10,
-      fillStyle: `rgb(${color_r},${color_g},${color_b})`,
+      fillStyle: `rgb(${window.color_r},${window.color_g},${window.color_b})`,
       precision: 2
   }
 }];

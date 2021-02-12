@@ -24,7 +24,6 @@ battery_status.streamTo(document.getElementById("battery"), 1000);
 var line3 = new Smoothie.TimeSeries();
 
 setInterval(function() {
-  var percent = Math.random();
   line3.append(new Date().getTime(), battery_size/100);
   document.getElementById("battery_percent").innerText = battery_size + '%';
   time_count += 1;

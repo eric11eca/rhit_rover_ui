@@ -1,11 +1,11 @@
 {
   "colors": {
-      "r": 170,
-      "g": 207,
-      "b": 209,
-      "black": "#000000",
-      "light_black": "#05080d",
-      "grey": "#262828"
+    "r": 204,
+    "g": 94,
+    "b": 55,
+    "black": "#000000",
+    "light_black": "#090B0A",
+    "grey": "#262827"
   },
   "cssvars": {
       "font_main": "United Sans Medium",
