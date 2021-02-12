@@ -7,7 +7,7 @@ const JOY_SUB_ON = "=> Subscribed to joy_speed topic";
 const JOY_SUB_OFF = "=> Unsubscribed joy_speed topic";
 
 
-const rosbridge_url = 'ws://137.112.239.58:9090';
+const rosbridge_url = `ws://${tron.ros.ip}:9090`;
 var first_close = true;
 
 var ros = new ROSLIB.Ros({
@@ -46,6 +46,11 @@ var camera_info_topic = new ROSLIB.Topic({
     messageType: 'sensor_msgs/CompressedImage'
 });
 
+var arm_camera_info_topic = new ROSLIB.Topic({
+    ros: ros, name: '/usb_cam/image_raw/compressed',
+    messageType: 'sensor_msgs/CompressedImage'
+});
+
 var joy_info_topic = new ROSLIB.Topic({
     ros: ros, name: '/driveCommands',
     messageType: 'std_msgs/Float32MultiArray'
@@ -58,7 +63,7 @@ function log_status(messgae, div_id) {
     node.innerHTML = messgae;
     document.getElementById(div_id).appendChild(node);
     updateScroll(div_id);
-    window.audioManager.folder.play();
+    //window.audioManager.folder.play();
 }
 
 

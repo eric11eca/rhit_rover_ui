@@ -1,0 +1,20 @@
+{
+  "colors": {
+      "r": 170,
+      "g": 207,
+      "b": 209,
+      "black": "#000000",
+      "light_black": "#05080d",
+      "grey": "#262828"
+  },
+  "cssvars": {
+      "font_main": "United Sans Medium",
+      "font_main_light": "United Sans Light"
+  },
+  "window": {
+      "zoom_factor": 0.8
+  },
+  "ros": {
+      "ip": "137.112.225.178"
+  }
+}

@@ -1,13 +1,20 @@
-const color_r = 170;
-const color_g = 207;
-const color_b = 209;
-const light_black = "#05080d";
-
 const { webFrame } = require('electron');
 const { watchFile } = require('fs');
 const { waitForDebugger } = require('inspector');
 
-webFrame.setZoomFactor(1.0);
+const fs = require('fs');
+
+let tronFile = fs.readFileSync(`${__dirname}/themes/tron.json`);
+let tron = JSON.parse(tronFile);
+
+let color_r = tron.colors.r;
+let color_g = tron.colors.g;
+let color_b = tron.colors.b;
+let black = tron.colors.black;
+let light_black = tron.colors.light_black;
+let grey = tron.colors.grey;
+
+webFrame.setZoomFactor(tron.window.zoom_factor);
 
 function loadNewWindow() {
   console.log("open new window");
