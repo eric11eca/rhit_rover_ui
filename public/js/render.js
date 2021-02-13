@@ -145,11 +145,11 @@ let locations = [{ lat: 39.4838804, lng: -87.3287343},
                  { lat: 39.48385978001079, lng: -87.32567667961122},
                  { lat: 39.48345403159525, lng: -87.32526898384096}];
 
-let time_count = 0;
+let time_count_map = 0;
 
 setInterval(function() {
-  if (time_count % 10 == 0) {
-    var i = time_count / 10;
+  if (time_count_map % 10 == 0) {
+    var i = time_count_map / 10;
     if (i < 8) {
       var marker = new google.maps.Marker({
         position: locations[i]
