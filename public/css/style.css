@@ -121,6 +121,10 @@ body {
   bottom: 0;
 }
 
+#map {
+  height: 480px;
+}
+
 .play {
   outline: none;
   border: none;

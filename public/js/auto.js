@@ -15,14 +15,8 @@ function initMap() {
 }
 
 
-// var marker = new google.maps.Marker({
-//     position: myLatlng,
-//     title:"Hello World!"
-// });
-// marker.setMap(map);
-
-
-const term = new Terminal();
-
-term.open(document.getElementById("terminal_container"));
-term.write("Hello from \x1B[1;3;31mxterm.js\x1B[0m $ ");
+var marker = new google.maps.Marker({
+     position: myLatlng,
+     title:"Hello World!"
+});
+marker.setMap(map);

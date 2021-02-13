@@ -113,6 +113,66 @@ window.subscribeCameraTopic = function(camera_id, camera_name, brand) {
   }
 };
 
+
+const { Loader } = require("@googlemaps/js-api-loader");
+
+let map;
+
+const loader = new Loader({
+  apiKey: "AIzaSyCoWpS31KRwGSgzU8bmGoF8kVkYwf9lAu0",
+  version: "weekly",
+});
+loader.load().then(() => {
+  console.log("Got MAPS");
+  const myLatLng = { lat: 39.4838804, lng: -87.3287343};
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: myLatLng,
+    zoom: 17,
+  });
+
+  new google.maps.Marker({
+		position: myLatLng,
+		map
+  });
+});
+
+let locations = [{ lat: 39.4838804, lng: -87.3287343},
+                 { lat: 39.4837976, lng: -87.3283374},
+                 { lat: 39.4839632, lng: -87.3280370},
+                 { lat: 39.4840585, lng: -87.3275756},
+                 { lat: 39.48403367146423, lng: -87.32691049575806},
+                 { lat: 39.48402953119659, lng: -87.32598781585695},
+                 { lat: 39.48385978001079, lng: -87.32567667961122},
+                 { lat: 39.48345403159525, lng: -87.32526898384096}];
+
+let time_count = 0;
+
+setInterval(function() {
+  if (time_count % 10 == 0) {
+    var i = time_count / 10;
+    if (i < 8) {
+      var marker = new google.maps.Marker({
+        position: locations[i]
+      });
+      marker.setMap(map);
+      
+      if (i > 0) {
+        const flightPath = new google.maps.Polyline({
+          path: [locations[i-1], locations[i]],
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2,
+        });
+        flightPath.setMap(map);
+      }
+    }
+  }
+  time_count += 1;
+}, 1000);
+
+
+
 //window.audioManager = new AudioManager();
 //window.audioManager.stdout.play();
 //window.audioManager.theme.play();
