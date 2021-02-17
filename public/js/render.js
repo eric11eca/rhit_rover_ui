@@ -76,6 +76,66 @@ window.videoPlayButtonControl = function(control_id, e) {
   }
 };
 
+
+const { Loader } = require("@googlemaps/js-api-loader");
+
+let map;
+
+const loader = new Loader({
+  apiKey: "AIzaSyCoWpS31KRwGSgzU8bmGoF8kVkYwf9lAu0",
+  version: "weekly",
+});
+
+let locations = [{ lat: 39.4838804, lng: -87.3287343},
+                 { lat: 39.4837976, lng: -87.3283374},
+                 { lat: 39.4839632, lng: -87.3280370},
+                 { lat: 39.4840585, lng: -87.3275756},
+                 { lat: 39.48403367146423, lng: -87.32691049575806},
+                 { lat: 39.48402953119659, lng: -87.32598781585695},
+                 { lat: 39.48385978001079, lng: -87.32567667961122},
+                 { lat: 39.48345403159525, lng: -87.32526898384096}];
+
+let time_count_map = 0;
+
+loader.load().then(() => {
+  console.log("Got MAPS");
+  const myLatLng = { lat: 39.4838804, lng: -87.3287343};
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: myLatLng,
+    zoom: 17,
+  });
+
+  new google.maps.Marker({
+		position: myLatLng,
+		map
+  });
+});
+
+setInterval(function() {
+  console.log(time_count_map);
+  if (time_count_map % 3 == 0) {
+    var i = time_count_map / 3;
+    if (i < 8) {
+      var marker = new google.maps.Marker({
+        position: locations[i]
+      });
+      marker.setMap(map);
+      
+      if (i > 0) {
+        const flightPath = new google.maps.Polyline({
+          path: [locations[i-1], locations[i]],
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2,
+        });
+        flightPath.setMap(map);
+      }
+    }
+  }
+  time_count_map += 1;
+}, 1000);
+
 window.streaming = {
   "drive_video_wrapper": false,
   "arm_video_wrapper": false,
@@ -85,9 +145,7 @@ window.streaming = {
 
 window.subscribeCameraTopic = function(camera_id, camera_name, brand) {
   let video = document.getElementById(camera_id);
-
   let camera_topic = window.ros_topics[camera_name];
-  console.log(camera_name);
 
   if (window.streaming[camera_id] == false) {
     window.streaming[camera_id] = true;
@@ -108,68 +166,32 @@ window.subscribeCameraTopic = function(camera_id, camera_name, brand) {
     video.innerHTML = `<h1>${brand}</h1>`;
     video.style.marginTop = "auto";
     video.style.marginLeft = "auto";
-    
-    window.create_globe('#' + camera_id);
+
+    if (camera_name == "grip_cam") {
+      time_count_map = 0;
+      video.innerHTML = `<div id="map"></div>`;
+
+      loader.load().then(() => {
+        console.log("Got MAPS");
+        const myLatLng = { lat: 39.4838804, lng: -87.3287343};
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: myLatLng,
+          zoom: 17,
+        });
+      
+        new google.maps.Marker({
+          position: myLatLng,
+          map
+        });
+      });
+    } else {
+      window.create_globe('#' + camera_id);
+    }
   }
 };
 
 
-const { Loader } = require("@googlemaps/js-api-loader");
 
-let map;
-
-const loader = new Loader({
-  apiKey: "AIzaSyCoWpS31KRwGSgzU8bmGoF8kVkYwf9lAu0",
-  version: "weekly",
-});
-loader.load().then(() => {
-  console.log("Got MAPS");
-  const myLatLng = { lat: 39.4838804, lng: -87.3287343};
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: myLatLng,
-    zoom: 17,
-  });
-
-  new google.maps.Marker({
-		position: myLatLng,
-		map
-  });
-});
-
-let locations = [{ lat: 39.4838804, lng: -87.3287343},
-                 { lat: 39.4837976, lng: -87.3283374},
-                 { lat: 39.4839632, lng: -87.3280370},
-                 { lat: 39.4840585, lng: -87.3275756},
-                 { lat: 39.48403367146423, lng: -87.32691049575806},
-                 { lat: 39.48402953119659, lng: -87.32598781585695},
-                 { lat: 39.48385978001079, lng: -87.32567667961122},
-                 { lat: 39.48345403159525, lng: -87.32526898384096}];
-
-let time_count_map = 0;
-
-setInterval(function() {
-  if (time_count_map % 10 == 0) {
-    var i = time_count_map / 10;
-    if (i < 8) {
-      var marker = new google.maps.Marker({
-        position: locations[i]
-      });
-      marker.setMap(map);
-      
-      if (i > 0) {
-        const flightPath = new google.maps.Polyline({
-          path: [locations[i-1], locations[i]],
-          geodesic: true,
-          strokeColor: "#FF0000",
-          strokeOpacity: 1.0,
-          strokeWeight: 2,
-        });
-        flightPath.setMap(map);
-      }
-    }
-  }
-  time_count += 1;
-}, 1000);
 
 
 

@@ -42,7 +42,7 @@ ros.getNodes(function(nodes) {
 
 window.ros_topics = {
     "drive_cam": new ROSLIB.Topic({
-        ros: ros, name: '/usb_cam/image_raw/compressed',
+        ros: ros, name: '/d435/color/image_raw/compressed',
         messageType: 'sensor_msgs/CompressedImage'
     }),
     
