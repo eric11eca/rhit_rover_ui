@@ -190,8 +190,23 @@ window.subscribeCameraTopic = function(camera_id, camera_name, brand) {
   }
 };
 
+const key_nodes = ["rover_control", "rover_slam", "rover_gps", 
+                   "razor_imu", "aruco_pose", "rover_navigation", 
+                   "rover_localization"];
 
-
+function updateNodeStatus(nodes) {
+  key_nodes.forEach(node => {
+    let el = document.createElement("tr");
+    status = "Down";
+    if (nodes.has(node)) {
+        status = "Up";
+    }
+    el.innerHTML = 
+        `<td class="name">${node.name}</td>
+        <td class="cpu">${status}%</td>`;
+    document.getElementById("node_table").append(el);
+  });
+}
 
 
 

@@ -35,10 +35,11 @@ window.setInterval(function(){
     ros.connect(rosbridge_url);
 }, 1000);
 
-
-ros.getNodes(function(nodes) {
-    console.log(nodes);
-});
+window.setInterval(function() {
+    ros.getNodes(function(nodes) {
+        updateNodeStatus(nodes);
+    });
+}, 1000);
 
 window.ros_topics = {
     "drive_cam": new ROSLIB.Topic({
@@ -78,8 +79,6 @@ function log_status(messgae, div_id) {
     window.updateScroll(div_id);
     //window.audioManager.folder.play();
 }
-
-
 
 
 
