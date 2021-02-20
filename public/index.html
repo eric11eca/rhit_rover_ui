@@ -148,10 +148,31 @@
             <table id="node_table">
               <thead>
                   <tr>
-                    <td class="name header">Node</td>
-                    <td class="cpu header">Status</td>
+                    <td class="user header">Node</td>
+                    <td class="state header">Status</td>
+                    <td class="name header">Msgs</td>
                   </tr>
               </thead>
+              <tr>
+                <td class="user">control</td>
+                <td id="control_state" class="state">down</td>
+                <td id="control_msg" class="name">No message received</td>
+              </tr>
+              <tr>
+                <td class="user">heading</td>
+                <td id="heading_state" class="state">down</td>
+                <td id="heading_msg" class="name">No message received</td>
+              </tr>
+              <tr>
+                <td class="user">gps</td>
+                <td id="gps_state" class="state">down</td>
+                <td id="gps_msg" class="name">No message received</td>
+              </tr>
+              <tr>
+                <td class="user">navigation</td>
+                <td id="odom_state" class="state">down</td>
+                <td id="odom_msg" class="name">No message received</td>
+              </tr>
               <tbody id="processList">
               </tbody>
             </table>

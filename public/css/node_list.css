@@ -1,51 +1,49 @@
-table#processContainer {
+table#node_table {
   display: block;
   max-height: 60vh;
   overflow: auto;
 }
 
-table#processContainer td.header {
+table#node_table td.header {
   font-weight: bold;
   background: rgba(var(--color_r), var(--color_g), var(--color_b), 0.6);
   color: var(--color_light_black);
   text-align: center;
 }
 
-table#processContainer td.header:hover {
+table#node_table td.header:hover {
   cursor: pointer;
 }
 
-table#processContainer td.pid {
+table#node_table td.pid {
   width: 5vw;
 }
 
-table#processContainer td.name {
-  width: 12vw;
+table#node_table td.name {
+  width: 16vw;
 }
 
-table#processContainer td.user {
+table#node_table td.user {
   width: 7vw;
 }
 
-table#processContainer td.cpu {
+table#node_table td.cpu {
   width: 3vw;
   text-align: center;
 }
 
-table#processContainer td.mem{
+table#node_table td.mem {
   width: 3vw;
   text-align: center;
-
 }
-table#processContainer td.state {
+table#node_table td.state {
   width: 6vw;
   text-align: center;
 }
-table#processContainer td.started {
+table#node_table td.started {
   width: 11vw;
-
 }
 
-table#processContainer td.runtime {
+table#node_table td.runtime {
   width: 5vw;
 }

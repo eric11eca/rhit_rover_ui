@@ -112,7 +112,6 @@ loader.load().then(() => {
 });
 
 setInterval(function() {
-  console.log(time_count_map);
   if (time_count_map % 3 == 0) {
     var i = time_count_map / 3;
     if (i < 8) {
@@ -189,24 +188,6 @@ window.subscribeCameraTopic = function(camera_id, camera_name, brand) {
     }
   }
 };
-
-const key_nodes = ["rover_control", "rover_slam", "rover_gps", 
-                   "razor_imu", "aruco_pose", "rover_navigation", 
-                   "rover_localization"];
-
-function updateNodeStatus(nodes) {
-  key_nodes.forEach(node => {
-    let el = document.createElement("tr");
-    status = "Down";
-    if (nodes.has(node)) {
-        status = "Up";
-    }
-    el.innerHTML = 
-        `<td class="name">${node.name}</td>
-        <td class="cpu">${status}%</td>`;
-    document.getElementById("node_table").append(el);
-  });
-}
 
 
 
