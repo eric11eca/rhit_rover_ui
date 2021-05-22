@@ -40,6 +40,11 @@ window.ros_topics = {
         ros: ros, name: '/d435/color/image_raw/compressed',
         messageType: 'sensor_msgs/CompressedImage'
     }),
+
+    "wide_cam": new ROSLIB.Topic({
+        ros: ros, name: '/base_cam/image_raw/compressed',
+        messageType: 'sensor_msgs/CompressedImage'
+    }),
     
     "grip_cam": new ROSLIB.Topic({
         ros: ros, name: '/grip_cam/image_raw/compressed',

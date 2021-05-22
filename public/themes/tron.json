@@ -12,12 +12,12 @@
       "font_main_light": "United Sans Light"
   },
   "window": {
-      "zoom_factor": 0.8,
+      "zoom_factor": 1.0,
       "battery_plot_width": "65%",
       "network_in_width": "70%",
       "network_out_width": "70%"
   },
   "ros": {
-      "ip": "137.112.225.178"
+      "ip": "localhost"
   }
 }

@@ -15,7 +15,7 @@ $("#armviz").on("mouseover mouseout", function (e) {
 });
 
 $("#arm_camera_play").on("click", function (e) {
-  window.subscribeCameraTopic("arm_video_wrapper", "grip_cam", "RHIT ROVER TEAM");
+  window.subscribeCameraTopic("arm_video_wrapper", "wide_cam", "RHIT ROVER TEAM");
 });
 
 

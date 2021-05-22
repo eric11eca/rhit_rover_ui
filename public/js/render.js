@@ -86,53 +86,52 @@ const loader = new Loader({
   version: "weekly",
 });
 
-let locations = [{ lat: 39.4838804, lng: -87.3287343},
-                 { lat: 39.4837976, lng: -87.3283374},
-                 { lat: 39.4839632, lng: -87.3280370},
-                 { lat: 39.4840585, lng: -87.3275756},
-                 { lat: 39.48403367146423, lng: -87.32691049575806},
-                 { lat: 39.48402953119659, lng: -87.32598781585695},
-                 { lat: 39.48385978001079, lng: -87.32567667961122},
-                 { lat: 39.48345403159525, lng: -87.32526898384096}];
+
+let locations = [{ lat: 39.485791, lng: -87.321623},
+                 { lat: 39.485828, lng: -87.321923},
+                 { lat: 39.485910, lng: -87.322143},
+                 { lat: 39.485943, lng: -87.322355},
+                 { lat: 39.485982, lng: -87.322494}];
 
 let time_count_map = 0;
 
 loader.load().then(() => {
   console.log("Got MAPS");
-  const myLatLng = { lat: 39.4838804, lng: -87.3287343};
+  const myLatLng = { lat: 39.485791, lng: -87.321623};
   map = new google.maps.Map(document.getElementById("map"), {
     center: myLatLng,
-    zoom: 17,
-  });
-
-  new google.maps.Marker({
-		position: myLatLng,
-		map
+    zoom: 20,
   });
 });
 
+timer = 0
 setInterval(function() {
-  if (time_count_map % 3 == 0) {
-    var i = time_count_map / 3;
-    if (i < 8) {
-      var marker = new google.maps.Marker({
-        position: locations[i]
-      });
-      marker.setMap(map);
-      
-      if (i > 0) {
-        const flightPath = new google.maps.Polyline({
-          path: [locations[i-1], locations[i]],
-          geodesic: true,
-          strokeColor: "#FF0000",
-          strokeOpacity: 1.0,
-          strokeWeight: 2,
+  if (timer % 10 == 0) {
+    if (time_count_map % 3 == 0) {
+      var i = time_count_map / 3;
+      if (i < 8) {
+        var marker = new google.maps.Marker({
+          position: locations[i]
         });
-        flightPath.setMap(map);
+        marker.setMap(map);
+        
+        if (i > 0) {
+          const flightPath = new google.maps.Polyline({
+            path: [locations[i-1], locations[i]],
+            geodesic: true,
+            strokeColor: "#FF0000",
+            strokeOpacity: 1.0,
+            strokeWeight: 2,
+          });
+          flightPath.setMap(map);
+        }
       }
     }
+    time_count_map += 1;
+    document.getElementById('gps_msg').innerText = `Lat: ${locations[i]['lat']}, Lng: ${locations[i]['lng']}`;
+    document.getElementById('gps_state').innerText = "ACTIVE";
   }
-  time_count_map += 1;
+  timer += 1;
 }, 1000);
 
 window.streaming = {
