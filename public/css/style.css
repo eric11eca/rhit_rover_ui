@@ -19,9 +19,8 @@
 
 button:hover {
   border: none;
-  outline: none
+  outline: none;
 }
-
 button:focus {
   border: none;
   outline: none;
@@ -194,4 +193,15 @@ body {
   color: rgba(var(--color_r), var(--color_g), var(--color_b), 0.5);
 }
 
+.Button1{
+  background-color: rgba(var(--color_r), var(--color_g), var(--color_b), 0.5);
+  border: none;
+  color: #000000;
+  font-family: main-font;
+}
+
+.Button1:active {
+  background-color: rgba(var(--color_r), var(--color_g), var(--color_b), 0.2);
+
+}
 

@@ -50,6 +50,10 @@ document.documentElement.style.setProperty('--color_black', theme.colors.black);
 document.documentElement.style.setProperty('--color_light_black', theme.colors.light_black);
 document.documentElement.style.setProperty('--color_grey', theme.colors.grey);
 
+
+const{ exec } = require("child_process");
+
+
 window.create_globe = function(div_id) {
   VANTA.GLOBE({
     el: div_id,
@@ -75,6 +79,29 @@ window.videoPlayButtonControl = function(control_id, e) {
     $(control_id).css("display", "block");
   }
 };
+
+
+
+document.getElementById("Button1").onclick = function(){
+  console.log("Button1");
+  exec("bash /home/runkeat/Documents/RoverRobotics/rhit_rover_ui/public/shell/test.sh", (error, stdout, stderr) => {
+    if (error) {
+      console.log(`error: ${error.message}`);
+        return;
+    }
+    if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+    }
+    console.log(`stdout:\n${stdout}`);
+  
+  });
+};
+
+
+
+
+
 
 
 const { Loader } = require("@googlemaps/js-api-loader");
