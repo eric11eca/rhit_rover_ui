@@ -84,7 +84,21 @@ window.videoPlayButtonControl = function(control_id, e) {
 
 document.getElementById("Button1").onclick = function(){
   console.log("Button1");
-  exec("bash /home/runkeat/Documents/RoverRobotics/rhit_rover_ui/public/shell/test.sh", (error, stdout, stderr) => {
+  var path;
+  exec("pwd", (error, stdout, stderr) => {
+    if (error) {
+      console.log(`error: ${error.message}`);
+        return;
+    }
+    if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+    }
+    path = stdout;
+    console.log(path)
+  });
+
+  exec("bash public/js/test.sh", (error, stdout, stderr) => {
     if (error) {
       console.log(`error: ${error.message}`);
         return;
