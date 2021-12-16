@@ -98,17 +98,20 @@ document.getElementById("Button1").onclick = function(){
     console.log(path)
   });
 
-  exec("bash public/js/test.sh", (error, stdout, stderr) => {
-    if (error) {
-      console.log(`error: ${error.message}`);
-        return;
-    }
-    if (stderr) {
-        console.log(`stderr: ${stderr}`);
-        return;
-    }
-    console.log(`stdout:\n${stdout}`);
-  
+  exec("pwd",(error0,stdout0,stderr0) =>{
+    stdout0 = stdout0.substring(0,stdout0.length-1);
+    exec("bash " + stdout0 + "/public/shell/test.sh", (error1, stdout1, stderr1) => {
+      if (error1) {
+        console.log(`error: ${error.message}`);
+          return;
+      }
+      if (stderr1) {
+          console.log(`stderr: ${stderr}`);
+          return;
+      }  
+      console.log(`stdout:\n${stdout1}`);
+    
+    });
   });
 };
 
