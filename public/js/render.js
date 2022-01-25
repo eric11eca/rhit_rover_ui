@@ -83,21 +83,6 @@ window.videoPlayButtonControl = function(control_id, e) {
 
 
 document.getElementById("Button1").onclick = function(){
-  console.log("Button1");
-  var path;
-  exec("pwd", (error, stdout, stderr) => {
-    if (error) {
-      console.log(`error: ${error.message}`);
-        return;
-    }
-    if (stderr) {
-        console.log(`stderr: ${stderr}`);
-        return;
-    }
-    path = stdout;
-    console.log(path)
-  });
-
   exec("pwd",(error0,stdout0,stderr0) =>{
     stdout0 = stdout0.substring(0,stdout0.length-1);
     exec("bash " + stdout0 + "/public/shell/test.sh", (error1, stdout1, stderr1) => {
