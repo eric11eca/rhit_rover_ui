@@ -81,27 +81,22 @@ window.videoPlayButtonControl = function(control_id, e) {
 };
 
 
+const { app } = require ('electron').remote;
+const terminal = 'gnome-terminal -e \'sh -c "';
+const terminal2 = ' exec bash"\'';
 
 document.getElementById("Button1").onclick = function(){
   exec("pwd",(error0,stdout0,stderr0) =>{
     stdout0 = stdout0.substring(0,stdout0.length-1);
-    exec("bash " + stdout0 + "/public/shell/test.sh", (error1, stdout1, stderr1) => {
-      if (error1) {
-        console.log(`error: ${error.message}`);
-          return;
-      }
-      if (stderr1) {
-          console.log(`stderr: ${stderr}`);
-          return;
-      }  
-      console.log(`stdout:\n${stdout1}`);
-    
-    });
+    exec(terminal + "bash " + stdout0 + "/public/shell/test.sh;" +terminal2);
   });
 };
 
-
-
+document.getElementById("terminal_run").onclick = function () {
+  console.log(document.getElementById("command-input").value);
+  let newTerminal = exec (terminal);//+" -e \""+document.getElementById("command-input").value+"\"");
+  newTerminal.on ('error', (err) => { console.log (err); });
+};
 
 
 
