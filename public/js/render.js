@@ -85,6 +85,15 @@ const { app } = require ('electron').remote;
 const terminal = 'gnome-terminal -e \'sh -c "';
 const terminal2 = ' "\'';
 
+
+document.getElementById("new_terminal").onclick = function(){
+  exec("pwd",(error0,stdout0,stderr0) =>{
+    stdout0 = stdout0.substring(0,stdout0.length-1);
+    exec(terminal + " cd ../rhit-rover; exec bash" + terminal2);
+  });
+};
+
+
 document.getElementById("start_rover").onclick = function(){
   exec("pwd",(error0,stdout0,stderr0) =>{
     stdout0 = stdout0.substring(0,stdout0.length-1);
@@ -107,16 +116,6 @@ document.getElementById("start_server").onclick = function(){
     stdout0 = stdout0.substring(0,stdout0.length-1);
     exec(terminal + "bash " + stdout0 + "/public/shell/start_server.sh;" + terminal2);
   });
-};
-
-
-
-
-
-document.getElementById("terminal_run").onclick = function () {
-  console.log(document.getElementById("command-input").value);
-  let newTerminal = exec (terminal);//+" -e \""+document.getElementById("command-input").value+"\"");
-  newTerminal.on ('error', (err) => { console.log (err); });
 };
 
 
