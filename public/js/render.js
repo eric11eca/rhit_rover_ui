@@ -102,6 +102,16 @@ document.getElementById("start_ui").onclick = function(){
 
 
 
+document.getElementById("start_server").onclick = function(){
+  exec("pwd",(error0,stdout0,stderr0) =>{
+    stdout0 = stdout0.substring(0,stdout0.length-1);
+    exec(terminal + "bash " + stdout0 + "/public/shell/start_server.sh;" + terminal2);
+  });
+};
+
+
+
+
 
 document.getElementById("terminal_run").onclick = function () {
   console.log(document.getElementById("command-input").value);
