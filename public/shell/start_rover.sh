@@ -1,11 +1,9 @@
-ls ../
-cd ../rhit-rover
+#!/bin/bash
 
 
-ssh rover
-pass: rover02
+cd ../rhit-rover/rover
 
-roslaunch rover_control rover.drive
-roslaunch rover_control rover.teleop
+gnome-terminal -e 'sh -c "echo pass=rover02 ; ssh rover && roslaunch rover_bringup bringup.launch ; exec bash"'
+roslaunch rover_bringup bringup_client.launch
 
 exec bash

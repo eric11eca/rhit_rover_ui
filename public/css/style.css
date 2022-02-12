@@ -198,6 +198,7 @@ body {
   border: none;
   color: #000000;
   font-family: main-font;
+  width: 180px
 }
 
 .Button1:active {

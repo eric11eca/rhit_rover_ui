@@ -85,27 +85,43 @@ const { app } = require ('electron').remote;
 const terminal = 'gnome-terminal -e \'sh -c "';
 const terminal2 = ' "\'';
 
-
 document.getElementById("new_terminal").onclick = function(){
   exec("pwd",(error0,stdout0,stderr0) =>{
     stdout0 = stdout0.substring(0,stdout0.length-1);
     exec(terminal + " cd ../rhit-rover; exec bash" + terminal2);
+  }); 
+};
+
+
+const controller = new AbortController();
+const { signal } = controller;
+
+document.getElementById("start_teleop_drive").onclick = function(){
+  exec("pwd",(error0,stdout0,stderr0) =>{
+    stdout0 = stdout0.substring(0,stdout0.length-1);
+    exec(terminal + "bash " + stdout0 + "/public/shell/start_teleop_drive.sh;"+ terminal2);
   });
 };
 
 
-document.getElementById("start_rover").onclick = function(){
+document.getElementById("start_local_auto_drive").onclick = function(){ 
   exec("pwd",(error0,stdout0,stderr0) =>{
     stdout0 = stdout0.substring(0,stdout0.length-1);
-    exec(terminal + "bash " + stdout0 + "/public/shell/start_rover.sh;"+ terminal2);
+    exec(terminal + "bash " + stdout0 + "/public/shell/start_local_auto_drive.sh;" + terminal2);
   });
 };
 
-
-document.getElementById("start_ui").onclick = function(){
+document.getElementById("start_cameras").onclick = function(){ 
   exec("pwd",(error0,stdout0,stderr0) =>{
     stdout0 = stdout0.substring(0,stdout0.length-1);
-    exec(terminal + "bash " + stdout0 + "/public/shell/start_ui.sh;" + terminal2);
+    exec(terminal + "bash " + stdout0 + "/public/shell/start_cameras.sh;" + terminal2);
+  });
+};
+
+document.getElementById("start_rover").onclick = function(){ 
+  exec("pwd",(error0,stdout0,stderr0) =>{
+    stdout0 = stdout0.substring(0,stdout0.length-1);
+    exec(terminal + "bash " + stdout0 + "/public/shell/start_rover.sh;" + terminal2);
   });
 };
 
@@ -114,7 +130,7 @@ document.getElementById("start_ui").onclick = function(){
 document.getElementById("start_server").onclick = function(){
   exec("pwd",(error0,stdout0,stderr0) =>{
     stdout0 = stdout0.substring(0,stdout0.length-1);
-    exec(terminal + "bash " + stdout0 + "/public/shell/start_server.sh;" + terminal2);
+    exec(terminal + "bash " + stdout0 + "/public/shell/start_server.sh;" + terminal2, { signal } );
   });
 };
 

@@ -73,39 +73,6 @@
           </div>
         </div>
       </div>
-      <!--div class="col-xl-4 col-lg-12"-->
-        <div id="data_card2" class="card h-100 card-chart">
-          <h5 class="card-header">ROS Task Execution</h5>
-          <div>
-            <table id="button_table">
-            <tr>
-              <td id="New_terminal" class="state">
-                <button id="new_terminal" class="Button1"> New Terminal </button>
-              </td>
-            </tr>
-            <tr>
-              <td id="Start_rover" class="state">
-                <button id="start_rover" class="Button1"> Start Rover </button>
-              </td>
-            </tr>
-	    <tr>
-              <td id="Start_server" class="state">
-                <button id="start_server" class="Button1"> Start Server </button>
-              </td>
-            </tr>
-
-	    <tr>
-              <td id="Start_ui" class="state">
-                <button id="start_ui" class="Button1"> Start Ui </button>
-              </td>
-            </tr>
-
-            <tbody id="buttonList">
-            </tbody>
-          </table>
-          </div>
-	</div>
-      </!--div-->
       <div class="col">
         <div id="armviz" class="card video_card">
           <div class="card-body">
@@ -172,7 +139,49 @@
           </div>
         </div>
       </div>
-      
+      <div class="col-xl-4 col-lg-12"> 
+        <div id="data_card2" class="card h-100 card-chart">
+          <h5 class="card-header">ROS Task Execution</h5>
+          <div>
+            <table id="button_table">
+            <tr>
+              <td id="New_terminal" class="state">
+                <button id="new_terminal" class="Button1"> New Terminal </button>
+              </td>
+            </tr>
+            <tr>
+              <td id="Start_teleop_drive" class="state">
+                <button id="start_teleop_drive" class="Button1"> Start Teleop Drive </button>
+              </td>
+            </tr>
+	    <tr>
+              <td id="Start_server" class="state">
+                <button id="start_server" class="Button1"> Start Server </button>
+              </td>
+            </tr>
+
+	    <tr>
+              <td id="Start_local_auto_drive" class="state">
+                <button id="start_local_auto_drive" class="Button1"> Start Local Autonomous Drive</button>
+              </td>
+            </tr>
+            <tr>
+              <td id="Start_cameras" class="state">
+                <button id="start_cameras" class="Button1"> Start Cameras </button>
+              </td>
+            </tr>
+            <tr>
+              <td id="Start_rover" class="state">
+                <button id="start_rover" class="Button1"> Start Rover </button>
+              </td>
+            </tr>
+
+            <tbody id="buttonList">
+            </tbody>
+            </table>
+          </div>
+	</div>
+      </div>
       <div class="col-xl-4 col-lg-12">
         <div id="data_card1" class="card h-100 card-chart">
           <h5 class="card-header">Node Status</h5>
@@ -212,14 +221,7 @@
         </div>
       </div>
       
-      <div class="col-xl-4 col-lg-12">
-        <div id="data_card3" class="card h-100 card-chart">
-          <h5 class="card-header">Status Log</h5>
-          <div id="status" class="card-body"></div>
-        </div>
-      </div>
-    
-    </div>
+     </div>
   </div>
 
   <!-- Jquery Lib JS -->
