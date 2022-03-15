@@ -1,4 +1,4 @@
-cd ../rhit-rover/rover
+cd ../rover
 
 bash run_build.sh
 source devel/setup.bash
